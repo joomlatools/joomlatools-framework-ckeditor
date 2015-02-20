@@ -1,0 +1,29 @@
+{
+    "name": "nooku/nooku-ckeditor",
+    "type": "nooku-component",
+    "license": "GPLv3",
+    "description": "A re-usable component that provides a CKeditor integration",
+    "keywords": [
+        "nooku",
+        "components",
+        "ckeditor",
+        "wysiwyg"
+    ],
+    "homepage": "https://github.com/nooku/nooku-ckeditor",
+    "authors": [
+        {
+            "name": "Timble",
+            "email": "info@timble.net",
+            "homepage": "http://www.timble.net"
+        }
+    ],
+    "require": {
+        "nooku/nooku-framework": "~2.0"
+    },
+    "autoload": {
+        "files": ["autoload.php"]
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
