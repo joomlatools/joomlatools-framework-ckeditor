@@ -8,9 +8,8 @@
  */
 ?>
 
-<ktml:script src="assets://js/koowa.js" />
-<ktml:script src="assets://ckeditor/ckeditor/ckeditor.js" />
-<ktml:script src="assets://ckeditor/js/editor.js" />
+<ktml:script src="media://koowa/com_ckeditor/ckeditor/ckeditor.js" />
+<ktml:script src="media://koowa/com_ckeditor/js/editor.js" />
 
 <? $options = new  KObjectConfig($options);  ?>
 
