@@ -14,18 +14,24 @@
 <?php $options = new  KObjectConfig($options);  ?>
 
 <script>
+    var defaultConfig = {
+        baseHref              : '<?php echo $options->baseHref ?>',
+        toolbar               : '<?php echo ($toolbar) ? $toolbar : $options->toolbar ?>',
+        height                : '<?php echo $options->height ?>',
+        width                 : '<?php echo $options->width ?>',
+        language              : '<?php echo $options->language ?>',
+        contentsLanguage      : '<?php echo $options->contentsLanguage ?>',
+        contentsLangDirection : '<?php echo $options->contentsLangDirection ?>',
+        scayt_autoStartup     : '<?php echo $options->scayt_autoStartup ?>',
+        removeButtons         : '<?php echo $options->removeButtons ?>'
+    };
+
+    var preferredConfig = <?php echo (!is_null($config)) ? json_encode($config) : '""' ?>;
+
+    var config_<?php echo $id ?> = (preferredConfig) ? preferredConfig : defaultConfig;
+
     jQuery(document).ready(function() {
-        CKEDITOR.replace( '<?php echo $id ?>', {
-            baseHref              : '<?php echo $options->baseHref ?>',
-            toolbar               : '<?php echo ($toolbar) ? $toolbar : $options->toolbar ?>',
-            height                : '<?php echo $options->height ?>',
-            width                 : '<?php echo $options->width ?>',
-            language              : '<?php echo $options->language ?>',
-            contentsLanguage      : '<?php echo $options->contentsLanguage ?>',
-            contentsLangDirection : '<?php echo $options->contentsLangDirection ?>',
-            scayt_autoStartup     : '<?php echo $options->scayt_autoStartup ?>',
-            removeButtons         : '<?php echo $options->removeButtons ?>'
-        });
+        CKEDITOR.replace( '<?php echo $id ?>', config_<?php echo $id ?>);
     });
 </script>
 
