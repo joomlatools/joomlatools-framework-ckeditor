@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Nooku Framework - http://nooku.org/framework
  *
@@ -11,22 +11,28 @@
 <ktml:script src="media://koowa/com_ckeditor/ckeditor/ckeditor.js" />
 <ktml:script src="media://koowa/com_ckeditor/js/editor.js" />
 
-<?php $options = new  KObjectConfig($options);  ?>
+<? $options = new  KObjectConfig($options);  ?>
 
 <script>
+    var defaultConfig = {
+        baseHref              : '<?= $options->baseHref ?>',
+        toolbar               : '<?= ($toolbar) ? $toolbar : $options->toolbar ?>',
+        height                : '<?= $options->height ?>',
+        width                 : '<?= $options->width ?>',
+        language              : '<?= $options->language ?>',
+        contentsLanguage      : '<?= $options->contentsLanguage ?>',
+        contentsLangDirection : '<?= $options->contentsLangDirection ?>',
+        scayt_autoStartup     : '<?= $options->scayt_autoStartup ?>',
+        removeButtons         : '<?= $options->removeButtons ?>'
+    };
+
+    var preferredConfig = <?= (!is_null($config)) ? json_encode($config) : '""' ?>;
+
+    var config_<?= $id ?> = (preferredConfig) ? preferredConfig : defaultConfig;
+
     jQuery(document).ready(function() {
-        CKEDITOR.replace( '<?php echo $id ?>', {
-            baseHref              : '<?php echo $options->baseHref ?>',
-            toolbar               : '<?php echo ($toolbar) ? $toolbar : $options->toolbar ?>',
-            height                : '<?php echo $options->height ?>',
-            width                 : '<?php echo $options->width ?>',
-            language              : '<?php echo $options->language ?>',
-            contentsLanguage      : '<?php echo $options->contentsLanguage ?>',
-            contentsLangDirection : '<?php echo $options->contentsLangDirection ?>',
-            scayt_autoStartup     : '<?php echo $options->scayt_autoStartup ?>',
-            removeButtons         : '<?php echo $options->removeButtons ?>'
-        });
+        CKEDITOR.replace( '<?= $id ?>', config_<?= $id ?>);
     });
 </script>
 
-<textarea id="<?php echo $id ?>" name="<?php echo $name ?>" class="ckeditor editable-<?php echo $id ?> validate-editor <?php echo $class ?>" style="visibility:hidden"><?php echo $text ?></textarea>
+<textarea id="<?= $id ?>" name="<?= $name ?>" class="ckeditor editable-<?= $id ?> validate-editor <?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
