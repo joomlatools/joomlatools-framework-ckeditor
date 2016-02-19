@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <koowa-component>
-    <name>CKeditor</name>
+    <name>ckeditor</name>
     <identifier>com:ckeditor</identifier>
     <version>2.0.0</version>
 </koowa-component>
