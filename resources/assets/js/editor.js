@@ -6,8 +6,6 @@
  * @link        http://github.com/nooku/nooku-ckeditor for the canonical source repository
  */
 
-if(!Koowa) var Koowa = {};
-
 kQuery(document).ready(function(){
     // Hook into koowa controller validate event
     kQuery('.-koowa-form').on('koowa:validate', function(context) {
