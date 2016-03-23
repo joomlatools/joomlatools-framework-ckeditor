@@ -16,7 +16,7 @@
 <script>
     var defaultConfig = {
         baseHref              : '<?= $options->baseHref ?>',
-        toolbar               : '<?= ($toolbar) ? $toolbar : $options->toolbar ?>',
+        toolbar               : '<?= isset($toolbar) ? $toolbar : $options->toolbar ?>',
         height                : '<?= $options->height ?>',
         width                 : '<?= $options->width ?>',
         language              : '<?= $options->language ?>',
