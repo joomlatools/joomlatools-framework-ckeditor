@@ -26,7 +26,7 @@
         removeButtons         : '<?= $options->removeButtons ?>'
     };
 
-    var preferredConfig = <?= (!is_null($config)) ? json_encode($config) : '""' ?>;
+    var preferredConfig = <?= isset($config) ? json_encode($config) : '""' ?>;
 
     var config_<?= $id ?> = (preferredConfig) ? preferredConfig : defaultConfig;
 
