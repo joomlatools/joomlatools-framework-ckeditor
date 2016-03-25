@@ -1,5 +1,5 @@
 {
-    "name": "nooku/nooku-ckeditor",
+    "name": "joomlatools/framework-ckeditor",
     "type": "nooku-component",
     "license": "GPLv3",
     "description": "A re-usable component that provides a CKeditor integration",
@@ -9,7 +9,7 @@
         "ckeditor",
         "wysiwyg"
     ],
-    "homepage": "https://github.com/nooku/nooku-ckeditor",
+    "homepage": "https://github.com/joomlatools/joomlatools-framework-ckeditor",
     "authors": [
         {
             "name": "Timble",
