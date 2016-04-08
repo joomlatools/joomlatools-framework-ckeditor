@@ -1,43 +1,36 @@
-# Nooku Ckeditor
+# Ckeditor for Joomlatools Framework
 
-## What is Nooku Ckeditor?
-
-Nooku Ckeditor is a re-usable component that provides an interface for the [CKeditor](http://ckeditor.com) web editor.
-This component is built on top of [Nooku Framework](https://github.com/nooku/nooku-framework) and makes it easy to
-add web editing functionality to other components.
+This is a re-usable component that provides an interface for the [CKeditor](http://ckeditor.com) web editor.
+This component is built on top of [Joomlatools Framework](https://github.com/joomlatools/joomlatools-framework) and makes it easy to add web editing functionality to other components.
 
 ## Requirements
 
-- Nooku Framework 2 or newer.
+- Joomlatools Framework 2 or newer.
 - PHP 5.2 or newer.
 - MySQL 5.
 
 ## Installation
 
-Nooku Ckeditor can and should be installed by using [Composer](https://getcomposer.org/).
-
-Go to the root directory of your Joomla installation in command line and execute this command:
+Install by using [Composer](https://getcomposer.org/). Go to the root directory of your Joomla installation in command line and execute this command:
 
 ```
-composer require nooku/nooku-ckeditor:1.*
+composer require joomlatools/joomlatools-framework-ckeditor:1.*
 ```
 
-The component will be installed in the `vendor` folder of the root directory of your Joomla site. Nooku will make sure
-that the component is bootstrapped from that location and made available to other components extending it or just making
-use of it.
+The component will be installed in the `vendor` folder of the root directory of your Joomla site. The framework will make sure that the component is bootstrapped from that location and made available to other components extending it or just making use of it.
 
 ## Contributing
 
-Nooku CKEditor is an open source, community-driven project. Contributions are welcome from everyone. 
+This component is an open source, community-driven project. Contributions are welcome from everyone. 
 We have [contributing guidelines](CONTRIBUTING.md) to help you get started.
 
 ## Contributors
 
-See the list of [contributors](https://github.com/nooku/nooku-ckeditor/contributors).
+See the list of [contributors](https://github.com/joomlatools/joomlatools-framework-ckeditor/contributors).
 
 ## License 
 
-Nooku Ckeditor is free and open-source software licensed under the [GPLv3 license](LICENSE.txt).
+Ckeditor for Joomlatools Framework is free and open-source software licensed under the [GPLv3 license](LICENSE.txt).
 
 ## Community
 
