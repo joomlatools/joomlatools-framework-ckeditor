@@ -1,13 +1,12 @@
-# Ckeditor for Joomlatools Framework
+# Ckeditor Component for Joomlatools Framework
 
-This is a re-usable component that provides an interface for the [CKeditor](http://ckeditor.com) web editor.
-This component is built on top of [Joomlatools Framework](https://github.com/joomlatools/joomlatools-framework) and makes it easy to add web editing functionality to other components.
+This is a re-usable component for [Joomlatools Framework] that provides an interface for the [CKeditor](http://ckeditor.com) web editor.
 
 ## Requirements
 
-- Joomlatools Framework 2 or newer.
-- PHP 5.2 or newer.
-- MySQL 5.
+- Joomlatools Framework 2 or newer
+- PHP 5.3 or newer
+- MySQL 5
 
 ## Installation
 
@@ -40,3 +39,5 @@ Keep track of development and community news.
 * Join [joomlatools/dev on Gitter](http://gitter.im/joomlatools/dev)
 * Read the [Joomlatools Developer Blog](https://www.joomlatools.com/developer/blog/)
 * Subscribe to the [Joomlatools Developer Newsletter](https://www.joomlatools.com/developer/newsletter/)
+
+[Joomlatools Framework]: http://www.joomlatools.com/developer/framework/
