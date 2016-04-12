@@ -13,7 +13,7 @@ This is a re-usable component for [Joomlatools Framework] that provides an inter
 Install by using [Composer](https://getcomposer.org/). Go to the root directory of your Joomla installation in command line and execute this command:
 
 ```
-composer require joomlatools/joomlatools-framework-ckeditor:1.*
+composer require joomlatools/framework-ckeditor:1.*
 ```
 
 The component will be installed in the `vendor` folder of the root directory of your Joomla site. The framework will make sure that the component is bootstrapped from that location and made available to other components extending it or just making use of it.
