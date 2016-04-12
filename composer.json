@@ -4,13 +4,17 @@
     "license": "GPLv3",
     "description": "A re-usable component that provides a CKeditor integration",
     "keywords": [
-        "nooku",
-        "components",
+        "joomla",
+        "component",
         "ckeditor",
         "wysiwyg"
     ],
     "homepage": "https://github.com/joomlatools/joomlatools-framework-ckeditor",
-    "authors": [
+    "authors": [ {
+            "name": "Johan Janssens",
+            "email": "johan@janssens.me",
+            "homepage": "http://about.me/johanjanssens"
+        },
         {
             "name": "Timble",
             "email": "info@timble.net",
@@ -18,7 +22,7 @@
         }
     ],
     "require": {
-        "nooku/nooku-framework": "~2.0"
+        "joomlatools/framework": "~2.0"
     },
     "autoload": {
         "files": ["autoload.php"]
