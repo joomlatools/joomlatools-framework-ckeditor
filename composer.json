@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "joomlatools/framework": "~2.0"
+        "joomlatools/framework": "~3.0"
     },
     "autoload": {
         "files": ["autoload.php"]
@@ -33,6 +33,6 @@
     "nooku-component": {
         "identifier": "com:ckeditor",
         "name": "ckeditor",
-        "version": "2.0.0"
+        "version": "1.0.0"
     }
 }
