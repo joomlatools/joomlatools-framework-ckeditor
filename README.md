@@ -4,8 +4,8 @@ This is a re-usable component for [Joomlatools Framework] that provides an inter
 
 ## Requirements
 
-- Joomlatools Framework 2 or newer
-- PHP 5.3 or newer
+- Joomlatools Framework 3
+- PHP 5.4 or newer
 - MySQL 5
 
 ## Installation
