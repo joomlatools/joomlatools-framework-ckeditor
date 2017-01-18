@@ -1,6 +1,6 @@
 {
     "name": "joomlatools/framework-ckeditor",
-    "type": "nooku-component",
+    "type": "joomlatools-extension",
     "license": "GPLv3",
     "description": "A re-usable component that provides a CKeditor integration",
     "keywords": [
@@ -24,15 +24,10 @@
     "require": {
         "joomlatools/framework": "~3.0"
     },
-    "autoload": {
-        "files": ["autoload.php"]
-    },
     "config": {
         "bin-dir": "bin/"
     },
-    "nooku-component": {
-        "identifier": "com:ckeditor",
-        "name": "ckeditor",
-        "version": "1.0.0"
+    "extra": {
+        "joomlatools-component": "ckeditor"
     }
 }
