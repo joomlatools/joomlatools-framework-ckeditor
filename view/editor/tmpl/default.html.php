@@ -31,7 +31,7 @@
     var config_<?= $id ?> = (preferredConfig) ? preferredConfig : defaultConfig;
 
     jQuery(document).ready(function() {
-        CKEDITOR.replace( '<?= $id ?>', config_<?= $id ?>);
+        var editor = CKEDITOR.replace( '<?= $id ?>', config_<?= $id ?>);
     });
 </script>
 
