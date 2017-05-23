@@ -30,7 +30,7 @@
 
     var config_<?= $id ?> = (preferredConfig) ? preferredConfig : defaultConfig;
 
-    jQuery(document).ready(function() {
+    kQuery(document).ready(function() {
         CKEDITOR.replace( '<?= $id ?>', config_<?= $id ?>);
     });
 </script>
