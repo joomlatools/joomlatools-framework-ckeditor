@@ -8,31 +8,44 @@
  */
 ?>
 
+<?= helper('behavior.jquery'); ?>
+
 <ktml:script src="media://koowa/com_ckeditor/ckeditor/ckeditor.js" />
 <ktml:script src="media://koowa/com_ckeditor/js/editor.js" />
 
-<? $options = new  KObjectConfig($options);  ?>
-
 <script>
-    var defaultConfig = {
-        baseHref              : '<?= $options->baseHref ?>',
-        toolbar               : '<?= isset($toolbar) ? $toolbar : $options->toolbar ?>',
-        height                : '<?= $options->height ?>',
-        width                 : '<?= $options->width ?>',
-        language              : '<?= $options->language ?>',
-        contentsLanguage      : '<?= $options->contentsLanguage ?>',
-        contentsLangDirection : '<?= $options->contentsLangDirection ?>',
-        scayt_autoStartup     : '<?= $options->scayt_autoStartup ?>',
-        removeButtons         : '<?= $options->removeButtons ?>'
-    };
+(function($) {
 
-    var preferredConfig = <?= isset($config) ? json_encode($config) : '""' ?>;
+    var id     = <?= json_encode($id); ?>;
+    var config = <?= new KObjectConfigJson($options) ?>;
 
-    var config_<?= $id ?> = (preferredConfig) ? preferredConfig : defaultConfig;
+    if (!config.autoGrow_maxHeight) {
+        config.autoGrow_maxHeight = $(window).height() - 230;
+    }
 
-    kQuery(document).ready(function() {
-        CKEDITOR.replace( '<?= $id ?>', config_<?= $id ?>);
+    $(document).ready(function() {
+        var instance = CKEDITOR.replace(id, config);
+
+        if (typeof Joomla === 'undefined') {
+            Joomla = {editors: {instances: {}}};
+        }
+        Joomla.editors.instances[id] = {
+            'id': id,
+            'element':  null,
+            'getValue': function () { return instance.getData(); },
+            'setValue': function (text) { return instance.setData(text); },
+            'replaceSelection': function (text) { return instance.insertHtml(text); },
+            'onSave': function() { return ''; }
+        };
     });
+
+
+})(kQuery);
+
+function jInsertEditorText(text, editor)
+{
+    CKEDITOR.instances[editor].insertHtml(text);
+}
 </script>
 
-<textarea id="<?= $id ?>" name="<?= $name ?>" class="ckeditor editable-<?= $id ?> validate-editor <?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
+<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
