@@ -31,9 +31,9 @@ class ComCkeditorViewEditorHtml extends KViewHtml
                 'width'             => '',
                 'extraAllowedContent'  => 'hr[id]',
                 'autoGrow_bottomSpace' => 50,
-                'extraPlugins'         => 'autocorrect,autolink,autogrow',
-                'removePlugins'        => 'resize',
-                'removeButtons'        => 'Subscript,Superscript,Styles,Anchor,AutoCorrect,Cut,Copy,PasteText',
+                'extraPlugins'         => ['autocorrect'],
+                'removePlugins'        => ['uploadfile', 'uploadimage'],
+                'removeButtons'        => ['Subscript','Superscript','Styles','Anchor','AutoCorrect','Cut','Copy','PasteText'],
             ]
         ));
 
@@ -61,6 +61,14 @@ class ComCkeditorViewEditorHtml extends KViewHtml
         //Set editor id
         if(!$context->data->id) {
             $context->data->id = $context->data->name;
+        }
+
+        foreach (['extraPlugins', 'removePlugins', 'removeButtons'] as $key) {
+            $value = KObjectConfig::unbox($this->getConfig()->options->$key);
+
+            if (is_array($value)) {
+                $this->getConfig()->options->$key = implode(',', $value);
+            }
         }
 
         //Set editor options
