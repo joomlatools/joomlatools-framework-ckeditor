@@ -18,18 +18,40 @@ class ComCkeditorViewEditorHtml extends KViewHtml
     protected function _initialize(KObjectConfig $config)
     {
         $locale = $this->getObject('translator')->getLocale();
+
         $config->append(array(
-            'options' => array(
-                'baseHref'          => '',
+            'id'      => null,
+            'name'    => null,
+            'attribs' => [],
+            'options' => [
+                'baseHref'          => $this->getObject('request')->getSiteUrl().'/',
                 'language'          => substr($locale, 0, strpos( $locale, '-' )),
                 'contentsLanguage'  => substr($locale, 0, strpos( $locale, '-' )),
                 'height'            => '',
                 'width'             => '',
-                'removeButtons'     => '',
-                'autoheight'        => true,
-                'toolbar'           => $this->toolbar ? $this->toolbar : 'standard',
-            )
+                'extraAllowedContent'  => 'hr[id]',
+                'autoGrow_bottomSpace' => 50,
+                'extraPlugins'         => ['autocorrect'],
+                'removePlugins'        => ['uploadfile', 'uploadimage'],
+                'removeButtons'        => ['Subscript','Superscript','Styles','Anchor','AutoCorrect','Cut','Copy','PasteText'],
+            ]
         ));
+
+        if (!$config->options->toolbarGroups)
+        {
+            $config->options->toolbarGroups = [
+                ["name" => "styles","groups" => ["styles"]],
+                ["name" => "basicstyles","groups" => ["basicstyles","cleanup"]],
+                ["name" => "links","groups" => ["links"]],
+                ["name" => "editing","groups" => ["find","selection","spellchecker","editing"]],
+                ["name" => "insert","groups" => ["insert"]],
+                ["name" => "forms","groups" => ["forms"]],
+                ["name" => "paragraph","groups" => ["list","indent","blocks","align","bidi","paragraph"]],
+                ["name" => "clipboard","groups" => ["clipboard","undo"]],
+                ["name" => "document","groups" => ["mode","document","doctools"]],
+                ["name" => "tools","groups" => ["tools"]],
+            ];
+        }
 
         parent::_initialize($config);
     }
@@ -41,11 +63,20 @@ class ComCkeditorViewEditorHtml extends KViewHtml
             $context->data->id = $context->data->name;
         }
 
+        foreach (['extraPlugins', 'removePlugins', 'removeButtons'] as $key) {
+            $value = KObjectConfig::unbox($this->getConfig()->options->$key);
+
+            if (is_array($value)) {
+                $this->getConfig()->options->$key = implode(',', $value);
+            }
+        }
+
         //Set editor options
         $context->data->append(array('options' => $this->getConfig()->options));
 
         //Set editor class
-        $context->data->class = isset($this->attribs['class']) ? $this->attribs['class'] : '';
+        $class = KObjectConfig::unbox($this->getConfig()->attribs->class);
+        $context->data->class = is_array($class) ? implode(' ', $class) : $class;
 
         parent::_fetchData($context);
     }
