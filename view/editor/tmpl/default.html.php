@@ -37,6 +37,8 @@
             'replaceSelection': function (text) { return instance.insertHtml(text); },
             'onSave': function() { return ''; }
         };
+
+        instance.setData(<?= json_encode($text); ?>);
     });
 
 
@@ -48,4 +50,4 @@ function jInsertEditorText(text, editor)
 }
 </script>
 
-<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
+<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"></textarea>
