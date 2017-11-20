@@ -50,4 +50,4 @@ function jInsertEditorText(text, editor)
 }
 </script>
 
-<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"></textarea>
+<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
