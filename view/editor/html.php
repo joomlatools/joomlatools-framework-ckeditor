@@ -29,7 +29,7 @@ class ComCkeditorViewEditorHtml extends KViewHtml
                 'contentsLanguage'     => substr($locale, 0, strpos( $locale, '-' )),
                 'height'               => '',
                 'width'                => '',
-                'extraAllowedContent'  => ["hr[id]","img[title]","img[data-*](*)","a[data-*,title](*)"],
+                'extraAllowedContent'  => ["hr[id]","img[data-*,title](*)","a[data-*,title](*)"],
                 'autoGrow_bottomSpace' => 50,
                 'extraPlugins'         => ['autocorrect'],
                 'removePlugins'        => ['uploadfile', 'uploadimage'],
