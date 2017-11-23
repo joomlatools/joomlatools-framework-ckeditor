@@ -24,7 +24,7 @@ class ComCkeditorViewEditorHtml extends KViewHtml
             'name'    => null,
             'attribs' => [],
             'options' => [
-                'baseHref'             => $this->getObject('request')->getSiteUrl().'/',
+                'baseHref'             => JUri::base(),
                 'language'             => substr($locale, 0, strpos( $locale, '-' )),
                 'contentsLanguage'     => substr($locale, 0, strpos( $locale, '-' )),
                 'height'               => '',
