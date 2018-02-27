@@ -1,7 +1,7 @@
 {
     "name": "joomlatools/framework-ckeditor",
     "type": "joomlatools-extension",
-    "license": "GPLv3",
+    "license": "GPL-3.0-only",
     "description": "A re-usable component that provides a CKeditor integration",
     "keywords": [
         "joomla",
