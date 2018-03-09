@@ -63,17 +63,16 @@ class ComCkeditorViewEditorHtml extends KViewHtml
             $context->data->id = $context->data->name;
         }
 
-
-        //Set editor options
-        $context->data->merge(array('options' => $this->getConfig()->options));
-
         foreach (['extraPlugins', 'removePlugins', 'removeButtons'] as $key) {
-            $value = KObjectConfig::unbox($context->data->options->$key);
+            $value = KObjectConfig::unbox($this->getConfig()->options->$key);
 
             if (is_array($value)) {
-                $context->data->options->$key = implode(',', $value);
+                $this->getConfig()->options->$key = implode(',', $value);
             }
         }
+
+        //Set editor options
+        $context->data->append(array('options' => $this->getConfig()->options));
 
         //Set editor class
         $class = KObjectConfig::unbox($this->getConfig()->attribs->class);
