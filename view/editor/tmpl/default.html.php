@@ -19,10 +19,6 @@
     var id     = <?= json_encode($id); ?>;
     var config = <?= new KObjectConfigJson($options) ?>;
 
-    if (!config.autoGrow_maxHeight) {
-        config.autoGrow_maxHeight = $(window).height() - 230;
-    }
-
     $(document).ready(function() {
         var instance = CKEDITOR.replace(id, config);
 
