@@ -8,7 +8,7 @@
 
 kQuery(document).ready(function(){
     // Hook into koowa controller validate event
-    kQuery('.k-js-form-controller').on('koowa:validate', function(context) {
+    kQuery('.k-js-form-controller').on('k:validate', function(context) {
         // Loop through all the editor intances
         // See: http://ckeditor.com/forums/CKEditor-3.x/Getting-CKEDITOR-instance
         for(var i in CKEDITOR.instances)
