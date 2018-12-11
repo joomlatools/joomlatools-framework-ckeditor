@@ -13,7 +13,7 @@
  * @author  Terry Visser <http://github.com/terryvisser>
  * @package Koowa\Component\Ckeditor
  */
-class ComCkeditorViewEditorHtml extends KViewHtml
+class ComCkeditorViewEditorHtml extends ComKoowaViewHtml
 {
     protected function _initialize(KObjectConfig $config)
     {
