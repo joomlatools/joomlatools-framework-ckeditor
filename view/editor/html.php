@@ -30,7 +30,7 @@ class ComCkeditorViewEditorHtml extends ComKoowaViewHtml
                 'height'               => '',
                 'width'                => '',
                 'extraAllowedContent'  => ["hr[id]","img[data-*,title](*)","a[data-*,title](*)"],
-                'extraPlugins'         => ['autocorrect'],
+                'extraPlugins'         => ['confighelper', 'autocorrect'],
                 'removePlugins'        => ['uploadfile', 'uploadimage'],
                 'removeButtons'        => ['Subscript','Superscript','Styles','Anchor','AutoCorrect','Cut','Copy','PasteText'],
             ]
@@ -76,6 +76,9 @@ class ComCkeditorViewEditorHtml extends ComKoowaViewHtml
         //Set editor class
         $class = KObjectConfig::unbox($this->getConfig()->attribs->class);
         $context->data->class = is_array($class) ? implode(' ', $class) : $class;
+
+        //Set editor placeholder
+        $context->data->placeholder = $context->data->attribs->placeholder ?: $this->getConfig()->attribs->placeholder;
 
         parent::_fetchData($context);
     }
