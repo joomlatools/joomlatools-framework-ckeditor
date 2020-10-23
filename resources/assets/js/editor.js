@@ -9,16 +9,16 @@
 kQuery(document).ready(function(){
     // Hook into koowa controller validate event
     kQuery('.k-js-form-controller').on('k:validate', function(context) {
-        // Loop through all the editor intances
-        // See: http://ckeditor.com/forums/CKEditor-3.x/Getting-CKEDITOR-instance
-        for(var i in CKEDITOR.instances)
-        {
-            element = document.getElementById(CKEDITOR.instances[i].name);
-
-            // If any instance is empty then abort the save action
-            if(!CKEDITOR.instances[i].getData() && element.classList.contains('ckeditor-required')) {
-                return false;
-            }
-        }
+        CKEDITOR.all().then(editors => {
+            Object.keys(editors).forEach(name => {
+                var element = document.getElementById(name);
+                var editor  = editors[name];
+        
+                // If any instance is empty then abort the save action
+                if (!editor.getData() && element.classList.contains('ckeditor-required')) {
+                    return false;
+                }
+            });
+        });
     });
 });

@@ -10,40 +10,69 @@
 
 <?= helper('behavior.jquery'); ?>
 
-<ktml:script src="media://koowa/com_ckeditor/ckeditor/ckeditor.js" />
+<ktml:script src="media://koowa/com_ckeditor/js/ckeditor.js" />
 <ktml:script src="media://koowa/com_ckeditor/js/editor.js" />
 
 <script>
-(function($) {
+var CKEDITOR = {
+    editors: [],
+    get: function( elementId ) {
+        var that = this;
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve(that.editors[ elementId ]);
+            }, 1000);
+        });
+    },
+    all: function() {
+        var that = this;
+        return new Promise(function(resolve, reject) {
+            setTimeout(function() {
+                resolve(that.editors);
+            }, 1000);
+        });
+    }
+};
 
+function createEditor( elementId ) {
+    return ClassicEditor
+        .create( document.getElementById( elementId ) )
+        .then( editor => {
+            CKEDITOR.editors[ elementId ] = editor;
+
+            if (typeof Joomla === 'undefined') {
+                Joomla = {editors: {instances: {}}};
+            }
+
+            Joomla.editors.instances[ elementId ] = {
+                'id': elementId,
+                'element':  null,
+                'getValue': function () { return editor.getData(); },
+                'setValue': function (text) { return editor.setData(text); },
+                'replaceSelection': function (text) { return editor.setData(text); },
+                'onSave': function() { return ''; }
+            };
+    
+            editor.setData(<?= json_encode($text); ?>);
+        } )
+        .catch( err => console.error( err.stack ) );
+}
+
+(function($) {
     var id     = <?= json_encode($id); ?>;
     var config = <?= new KObjectConfigJson($options) ?>;
 
     $(document).ready(function() {
-        var instance = CKEDITOR.replace(id, config);
-
-        if (typeof Joomla === 'undefined') {
-            Joomla = {editors: {instances: {}}};
-        }
-        Joomla.editors.instances[id] = {
-            'id': id,
-            'element':  null,
-            'getValue': function () { return instance.getData(); },
-            'setValue': function (text) { return instance.setData(text); },
-            'replaceSelection': function (text) { return instance.insertHtml(text); },
-            'onSave': function() { return ''; }
-        };
-
-        instance.setData(<?= json_encode($text); ?>);
+        createEditor('<?= $id ?>');
     });
-
-
 })(kQuery);
 
 function jInsertEditorText(text, editor)
 {
-    CKEDITOR.instances[editor].insertHtml(text);
+    CKEDITOR.get(editor).setData(text);
 }
 </script>
 
-<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
+<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>">
+    <?= $text ?>
+</textarea>
