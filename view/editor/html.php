@@ -30,8 +30,8 @@ class ComCkeditorViewEditorHtml extends ComKoowaViewHtml
                 'height'               => '',
                 'width'                => '',
                 'extraAllowedContent'  => ["hr[id]","img[data-*,title](*)","a[data-*,title](*)"],
-                'extraPlugins'         => ['autocorrect'],
-                'removePlugins'        => ['uploadfile', 'uploadimage'],
+                'extraPlugins'         => ['autocorrect','image2'],
+                'removePlugins'        => ['uploadfile', 'uploadimage', 'image'],
                 'removeButtons'        => ['Subscript','Superscript','Styles','Anchor','AutoCorrect','Cut','Copy','PasteText'],
             ]
         ));
