@@ -1,12 +1,273 @@
-﻿/*
- Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
- For licensing, see LICENSE.md or http://ckeditor.com/license
-*/
-(function(){function b(){this.setValue(f.getOption(this.option))}function c(){f.setOption(this.option,this.getValue())}var f=CKEDITOR.plugins.autocorrect;CKEDITOR.dialog.add("autocorrectOptions",function(a){a=a.lang.autocorrect;return{title:a.autocorrect,resizable:CKEDITOR.DIALOG_RESIZE_NONE,minWidth:350,minHeight:170,onOk:function(){this.commitContent()},contents:[{id:"autocorrect",label:a.autocorrect,title:a.autocorrect,accessKey:"",elements:[{type:"vbox",padding:0,children:[{type:"checkbox",id:"useReplacementTableCheckbox",
-option:"useReplacementTable",setup:b,commit:c,isChanged:!1,label:a.replaceTextAsYouType},{type:"html",html:'<div style="height: 150px;overflow-y: scroll;border: 1px solid #afafaf"></div>',setup:function(){this.getElement().setHtml("");var a=f.getOption("replacementTable"),b=document.createElement("table");b.style.width="100%";b.style.tableLayout="fixed";var c=b.appendChild(document.createElement("tbody")),g;for(g in a){var h=document.createElement("tr"),d=document.createElement("td");d.appendChild(document.createTextNode(g));
-d.style.borderBottom="1px solid #afafaf";d.style.padding="0 5px";var e=document.createElement("td");h.appendChild(d);e.appendChild(document.createTextNode(a[g]));e.style.borderBottom="1px solid #afafaf";e.style.padding="0 5px";h.appendChild(e);c.appendChild(h)}this.getElement().append(new CKEDITOR.dom.element(b))}}]}]},{id:"autoformatAsYouType",label:a.autoformatAsYouType,title:a.autoformatAsYouType,accessKey:"",elements:[{type:"fieldset",label:CKEDITOR.tools.htmlEncode(a.replaceAsYouType),children:[{type:"vbox",
-padding:0,children:[{type:"checkbox",id:"smartQuotesCheckbox",option:"smartQuotesAsYouType",setup:b,commit:c,isChanged:!1,label:a.smartQuotesOption},{type:"checkbox",id:"formatOrdinalsCheckbox",option:"formatOrdinalsAsYouType",setup:b,commit:c,isChanged:!1,label:a.formatOrdinalsOption},{type:"checkbox",id:"replaceHyphensCheckbox",option:"replaceHyphensAsYouType",setup:b,commit:c,isChanged:!1,label:a.replaceHyphensOption},{type:"checkbox",id:"recognizeUrlsCheckbox",option:"recognizeUrlsAsYouType",
-setup:b,commit:c,isChanged:!1,label:a.recognizeUrlsOption}]}]},{type:"fieldset",label:CKEDITOR.tools.htmlEncode(a.applyAsYouType),children:[{type:"vbox",padding:0,children:[{type:"checkbox",id:"formatBulletedListsCheckbox",option:"formatBulletedListsAsYouType",setup:b,commit:c,isChanged:!1,label:a.formatBulletedListsOption},{type:"checkbox",id:"formatNumberedListsCheckbox",option:"formatNumberedListsAsYouType",setup:b,commit:c,isChanged:!1,label:a.formatNumberedListsOption},{type:"checkbox",id:"createHorizontalRulesCheckbox",
-option:"createHorizontalRulesAsYouType",setup:b,commit:c,isChanged:!1,label:a.createHorizontalRulesOption}]}]}]},{id:"replace",label:a.autoformat,accessKey:"",elements:[{type:"fieldset",label:CKEDITOR.tools.htmlEncode(a.replace),children:[{type:"vbox",padding:0,children:[{type:"checkbox",id:"smartQuotesCheckbox",option:"smartQuotes",setup:b,commit:c,isChanged:!1,label:a.smartQuotesOption},{type:"checkbox",id:"formatOrdinalsCheckbox",option:"formatOrdinals",setup:b,commit:c,isChanged:!1,label:a.formatOrdinalsOption},
-{type:"checkbox",id:"replaceHyphensCheckbox",option:"replaceHyphens",setup:b,commit:c,isChanged:!1,label:a.replaceHyphensOption},{type:"checkbox",id:"recognizeUrlsCheckbox",option:"recognizeUrls",setup:b,commit:c,isChanged:!1,label:a.recognizeUrlsOption}]}]},{type:"fieldset",label:CKEDITOR.tools.htmlEncode(a.apply),children:[{type:"vbox",padding:0,children:[{type:"checkbox",id:"formatBulletedListsCheckbox",option:"formatBulletedLists",setup:b,commit:c,isChanged:!1,label:a.formatBulletedListsOption},
-{type:"checkbox",id:"formatNumberedListsCheckbox",option:"formatNumberedLists",setup:b,commit:c,isChanged:!1,label:a.formatNumberedListsOption},{type:"checkbox",id:"createHorizontalRulesCheckbox",option:"createHorizontalRules",setup:b,commit:c,isChanged:!1,label:a.createHorizontalRulesOption}]}]}]}],onShow:function(){this.setupContent()}}})})();
+﻿/**
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
+ */
+
+( function() {
+	var plugin = CKEDITOR.plugins.autocorrect;
+
+	function setupOption() {
+		this.setValue(plugin.getOption(this.option));
+	}
+
+	function commitOption() {
+		plugin.setOption(this.option, this.getValue());
+	}
+
+	CKEDITOR.dialog.add( 'autocorrectOptions', function( editor ) {
+		var lang = editor.lang.autocorrect;
+		return {
+				title: lang.autocorrect,
+				resizable: CKEDITOR.DIALOG_RESIZE_NONE,
+				minWidth: 350,
+				minHeight: 170,
+				onOk: function() {
+					this.commitContent();
+				},
+				contents: [
+					{
+					id: 'autocorrect',
+					label: lang.autocorrect,
+					title: lang.autocorrect,
+					accessKey: '',
+					elements: [
+							{
+							type: 'vbox',
+							padding: 0,
+							children: [
+								{
+								type: 'checkbox',
+								id: 'useReplacementTableCheckbox',
+								option: 'useReplacementTable',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.replaceTextAsYouType
+							},
+							{
+								type: 'html',
+								html: '<div style="height: 150px;overflow-y: scroll;border: 1px solid #afafaf"></div>',
+								setup: function() {
+									this.getElement().setHtml('');
+									var option = plugin.getOption('replacementTable');
+									var table = document.createElement('table');
+									table.style.width = '100%';
+									table.style.tableLayout = 'fixed';
+									var tbody = table.appendChild(document.createElement('tbody'));
+									for (var prop in option) {
+										var row = document.createElement('tr');
+										var cell1 = document.createElement('td');
+										cell1.appendChild(document.createTextNode(prop));
+										cell1.style.borderBottom = '1px solid #afafaf';
+										cell1.style.padding = '0 5px';
+										var cell2 = document.createElement('td');
+										row.appendChild(cell1);
+										cell2.appendChild(document.createTextNode(option[prop]));
+										cell2.style.borderBottom = '1px solid #afafaf';
+										cell2.style.padding = '0 5px';
+										row.appendChild(cell2);
+										tbody.appendChild(row);
+									}
+									this.getElement().append(new CKEDITOR.dom.element(table));
+								}
+							}]
+						}
+					]
+				},
+					{
+					id: 'autoformatAsYouType',
+					label: lang.autoformatAsYouType,
+					title: lang.autoformatAsYouType,
+					accessKey: '',
+					elements: [
+						{
+						type: 'fieldset',
+						label: CKEDITOR.tools.htmlEncode( lang.replaceAsYouType ),
+						children: [
+							{
+							type: 'vbox',
+							padding: 0,
+							children: [
+								{
+								type: 'checkbox',
+								id: 'smartQuotesCheckbox',
+								option: 'smartQuotesAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.smartQuotesOption
+							},
+								{
+								type: 'checkbox',
+								id: 'formatOrdinalsCheckbox',
+								option: 'formatOrdinalsAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.formatOrdinalsOption
+							},
+								{
+								type: 'checkbox',
+								id: 'replaceHyphensCheckbox',
+								option: 'replaceHyphensAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.replaceHyphensOption
+							},
+								{
+								type: 'checkbox',
+								id: 'recognizeUrlsCheckbox',
+								option: 'recognizeUrlsAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.recognizeUrlsOption
+							}
+							]
+						}
+						]
+					},
+						{
+						type: 'fieldset',
+						label: CKEDITOR.tools.htmlEncode( lang.applyAsYouType ),
+						children: [
+							{
+							type: 'vbox',
+							padding: 0,
+							children: [
+								{
+								type: 'checkbox',
+								id: 'formatBulletedListsCheckbox',
+								option: 'formatBulletedListsAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.formatBulletedListsOption
+							},
+								{
+								type: 'checkbox',
+								id: 'formatNumberedListsCheckbox',
+								option: 'formatNumberedListsAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.formatNumberedListsOption
+							},
+								{
+								type: 'checkbox',
+								id: 'createHorizontalRulesCheckbox',
+								option: 'createHorizontalRulesAsYouType',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.createHorizontalRulesOption
+							}
+							]
+						}
+						]
+					}
+					]
+				},
+					{
+					id: 'replace',
+					label: lang.autoformat,
+					accessKey: '',
+					elements: [
+						{
+						type: 'fieldset',
+						label: CKEDITOR.tools.htmlEncode( lang.replace ),
+						children: [
+							{
+							type: 'vbox',
+							padding: 0,
+							children: [
+								{
+								type: 'checkbox',
+								id: 'smartQuotesCheckbox',
+								option: 'smartQuotes',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.smartQuotesOption
+							},
+								{
+								type: 'checkbox',
+								id: 'formatOrdinalsCheckbox',
+								option: 'formatOrdinals',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.formatOrdinalsOption
+							},
+								{
+								type: 'checkbox',
+								id: 'replaceHyphensCheckbox',
+								option: 'replaceHyphens',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.replaceHyphensOption
+							},
+								{
+								type: 'checkbox',
+								id: 'recognizeUrlsCheckbox',
+								option: 'recognizeUrls',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.recognizeUrlsOption
+							}
+							]
+						}
+						]
+					},
+						{
+						type: 'fieldset',
+						label: CKEDITOR.tools.htmlEncode( lang.apply ),
+						children: [
+							{
+							type: 'vbox',
+							padding: 0,
+							children: [
+								{
+								type: 'checkbox',
+								id: 'formatBulletedListsCheckbox',
+								option: 'formatBulletedLists',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.formatBulletedListsOption
+							},
+								{
+								type: 'checkbox',
+								id: 'formatNumberedListsCheckbox',
+								option: 'formatNumberedLists',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.formatNumberedListsOption
+							},
+								{
+								type: 'checkbox',
+								id: 'createHorizontalRulesCheckbox',
+								option: 'createHorizontalRules',
+								setup: setupOption,
+								commit: commitOption,
+								isChanged: false,
+								label: lang.createHorizontalRulesOption
+							}
+							]
+						}
+						]
+					}
+					]
+				}
+				],
+				onShow: function() {
+					this.setupContent();
+				}
+		};
+	} );
+
+} )();

@@ -30,6 +30,7 @@
             'element':  null,
             'getValue': function () { return instance.getData(); },
             'setValue': function (text) { return instance.setData(text); },
+            'getSelection': function() { return instance.getSelection().getSelectedText(); },
             'replaceSelection': function (text) { return instance.insertHtml(text); },
             'onSave': function() { return ''; }
         };
