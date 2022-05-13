@@ -62,12 +62,9 @@ class ComCkeditorViewEditorHtml extends ComKoowaViewHtml
             $context->data->id = $context->data->name;
         }
 
-        foreach (['extraPlugins', 'removePlugins', 'removeButtons'] as $key) {
-            $value = KObjectConfig::unbox($this->getConfig()->options->$key);
-
-            if (is_array($value)) {
-                $this->getConfig()->options->$key = implode(',', $value);
-            }
+        $value = KObjectConfig::unbox($this->getConfig()->options->removeButtons);
+        if (is_array($value)) {
+            $this->getConfig()->options->removeButtons = implode(',', $value);
         }
 
         //Set editor options
