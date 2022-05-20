@@ -47,4 +47,4 @@ function jInsertEditorText(text, editor)
 }
 </script>
 
-<textarea id="<?= $id ?>" name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
+<textarea id="<?= $id ?>" <?= $placeholder ? 'placeholder="' . translate($placeholder) . '" ' : '' ?>name="<?= $name ?>" class="<?= $class ?>" style="visibility:hidden"><?= $text ?></textarea>
