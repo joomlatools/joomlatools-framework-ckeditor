@@ -15,7 +15,7 @@
  */
 class ComCkeditorVersion extends KObject
 {
-    const VERSION = '1.2.6';
+    const VERSION = '1.2.7';
 
     /**
      * Get the version.
